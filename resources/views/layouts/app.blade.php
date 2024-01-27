@@ -21,23 +21,29 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+    <body class="d-flex flex-column min-vh-100 py-0">
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+        @include('layouts.navigation')
+
+        <main class="min-vh-100 d-flex flex-column">
+
+            <div class="container mt-auto"><?php //The slot is what the page is. Ex: the HTML for the 'login.blade.php' page ?>
+                <div class="row justify-content-center">
+                    {{ $slot }}
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="footer bg-body-tertiary mt-auto align-self-center">
+                <div class="container">
+                    <p class="">
+                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+                    </p>
+                </div>
+            </footer>
+        </main>
+
     </body>
+
 </html>
