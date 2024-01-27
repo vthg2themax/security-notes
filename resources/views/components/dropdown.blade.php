@@ -10,7 +10,7 @@
         {{ $dropdownText }}
     </a>
 
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
         {{ $content }}
     </ul>
 </div>
