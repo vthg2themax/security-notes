@@ -25,45 +25,7 @@
 
 <body class="d-flex flex-column min-vh-100 py-0">
 
-    <header data-bs-theme="dark">
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">
-                    <x-application-logo />
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
-                        </li>
-                        @if (Route::has('dashboard'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
-                        </li>
-                        @endif
-
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Register</a>
-                        </li>
-                        @endif
-                    </ul>
-
-                    @if (Auth::check() == false)
-                    <ul class="navbar-nav mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/login') }}">Login</a>
-                        </li>
-                    </ul>
-                    @endif
-                </div>
-            </div>
-        </nav>
-    </header>
+    @include('layouts.navigation')
 
     <main class="min-vh-100 d-flex flex-column">
 
