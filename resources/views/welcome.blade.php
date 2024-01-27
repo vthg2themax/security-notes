@@ -39,26 +39,26 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
                         </li>
-                        @if (Route::has('login'))
-                        @auth
+                        @if (Route::has('dashboard'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
                         </li>
-                        @else
+                        @endif
+
                         @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">Register</a>
                         </li>
                         @endif
-                        @endauth
-                        @endif
                     </ul>
 
+                    @if (Auth::check() == false)
                     <ul class="navbar-nav mb-2 mb-md-0">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/login') }}">Login</a>
                         </li>
                     </ul>
+                    @endif
                 </div>
             </div>
         </nav>
