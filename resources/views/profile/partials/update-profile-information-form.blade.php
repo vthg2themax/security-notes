@@ -1,3 +1,11 @@
+@php
+
+$profile_image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
+if ($user->profile_image != '') {
+    $profile_image = 'data:image/png;base64,' . base64_encode(old('profile_image', $user->profile_image));
+}
+@endphp
+
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
@@ -13,7 +21,8 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form id="update-profile-form" method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data"
+        class="mt-6" novalidate="novalidate" >
         @csrf
         @method('patch')
 
@@ -47,18 +56,33 @@
             @endif
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+        <div>
+            <div class="row">
+                <x-input-label :value="__('Profile Image')" />
+                <img id="current_profile_image" src="{{ $profile_image }}" style="max-width:25vh;width:auto;">
+                <x-input-error class="mt-2" :messages="$errors->get('profile_image')" />
+            </div>
+        </div>
+
+
+        <div class="flex items-center mt-1">
+            <x-primary-button>{{ __('SaveProfile') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+            <p
+            x-data="{ show: true }"
+            x-show="show"
+            x-transition
+            x-init="setTimeout(() => show = false, 2000)"
+            class="text-sm text-gray-600"
+            >{{ __('Saved.') }}</p>
             @endif
         </div>
     </form>
+
+    <div>
+        <x-modify-profile-image old_profile_image="{{ $user->profile_image }}" user_id="{{ $user->id }}" />
+    </div>
+
+
 </section>
